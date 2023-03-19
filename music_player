@@ -1,0 +1,32 @@
+import tkinter as tk
+import pygame
+import os
+window = tk.Tk()
+window.title("Music Player")
+audio_files = ["song1.mp3", "song2.mp3", "song3.mp3"]
+pygame.mixer.init()
+def play_music():
+    pygame.mixer.music.load(audio_files[current_song])
+    pygame.mixer.music.play()
+
+def pause_music():
+    pygame.mixer.music.pause()
+
+def stop_music():
+    pygame.mixer.music.stop()
+play_button = tk.Button(window, text="Play", command=play_music)
+pause_button = tk.Button(window, text="Pause", command=pause_music)
+stop_button = tk.Button(window, text="Stop", command=stop_music)
+
+play_button.pack()
+pause_button.pack()
+stop_button.pack()
+def next_song():
+    global current_song
+    current_song += 1
+    if current_song >= len(audio_files):
+        current_song = 0
+    play_music()
+next_button = tk.Button(window, text="Next Song", command=next_song)
+next_button.pack()
+window.mainloop()
